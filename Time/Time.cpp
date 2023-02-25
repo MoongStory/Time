@@ -134,21 +134,23 @@ const std::string MOONG::Time::make_date_format(SYSTEMTIME system_time, std::str
 			MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::YEAR, MOONG::ConvertDataType::toString(system_time.wYear));
 		}
 
-		if (output.find(MOONG::TIME::DATE_FORMAT::MONTH_FORMAT) != std::string::npos)
+		if (output.find(MOONG::TIME::DATE_FORMAT::MONTH) != std::string::npos)
 		{
-			size_t index_head = output.find(MOONG::TIME::DATE_FORMAT::MONTH_FORMAT);
-			index_head += MOONG::TIME::DATE_FORMAT::MONTH_FORMAT.length() + 1;
-			size_t index_tail = output.find(")", index_head);
+			if (output.find(MOONG::TIME::DATE_FORMAT::MONTH_FORMAT) != std::string::npos)
+			{
+				size_t index_head = output.find(MOONG::TIME::DATE_FORMAT::MONTH_FORMAT);
+				size_t index_tail = output.find(")", index_head);
 
-			output.replace(
-				output.find(MOONG::TIME::DATE_FORMAT::MONTH_FORMAT),
-				(index_tail - (output.find(MOONG::TIME::DATE_FORMAT::MONTH_FORMAT)) + 1),
-				MOONG::StringTool::format(std::string("%") + output.substr(index_head, index_tail - index_head) + std::string("d"), system_time.wMonth)
-			);
-		}
-		else if (output.find(MOONG::TIME::DATE_FORMAT::MONTH) != std::string::npos)
-		{
-			MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::MONTH, MOONG::ConvertDataType::toString(system_time.wMonth));
+				std::string format = output.substr(index_head + MOONG::TIME::DATE_FORMAT::MONTH_FORMAT.length(), index_tail - (index_head + MOONG::TIME::DATE_FORMAT::MONTH_FORMAT.length()));
+
+				output.replace(index_head, (index_tail - index_head) + 1, "");
+
+				MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::MONTH, MOONG::StringTool::format(format, system_time.wMonth));
+			}
+			else
+			{
+				MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::MONTH, MOONG::ConvertDataType::toString(system_time.wMonth));
+			}
 		}
 
 		if (output.find(MOONG::TIME::DATE_FORMAT::DAY_OF_WEEK) != std::string::npos)
@@ -156,89 +158,99 @@ const std::string MOONG::Time::make_date_format(SYSTEMTIME system_time, std::str
 			MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::DAY_OF_WEEK, day_of_week);
 		}
 
-		if (output.find(MOONG::TIME::DATE_FORMAT::DAY_FORMAT) != std::string::npos)
+		if (output.find(MOONG::TIME::DATE_FORMAT::DAY) != std::string::npos)
 		{
-			size_t index_head = output.find(MOONG::TIME::DATE_FORMAT::DAY_FORMAT);
-			index_head += MOONG::TIME::DATE_FORMAT::DAY_FORMAT.length() + 1;
-			size_t index_tail = output.find(")", index_head);
+			if (output.find(MOONG::TIME::DATE_FORMAT::DAY_FORMAT) != std::string::npos)
+			{
+				size_t index_head = output.find(MOONG::TIME::DATE_FORMAT::DAY_FORMAT);
+				size_t index_tail = output.find(")", index_head);
 
-			output.replace(
-				output.find(MOONG::TIME::DATE_FORMAT::DAY_FORMAT),
-				(index_tail - (output.find(MOONG::TIME::DATE_FORMAT::DAY_FORMAT)) + 1),
-				MOONG::StringTool::format(std::string("%") + output.substr(index_head, index_tail - index_head) + std::string("d"), system_time.wDay)
-			);
-		}
-		else if (output.find(MOONG::TIME::DATE_FORMAT::DAY) != std::string::npos)
-		{
-			MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::DAY, MOONG::ConvertDataType::toString(system_time.wDay));
-		}
+				std::string format = output.substr(index_head + MOONG::TIME::DATE_FORMAT::DAY_FORMAT.length(), index_tail - (index_head + MOONG::TIME::DATE_FORMAT::DAY_FORMAT.length()));
 
-		if (output.find(MOONG::TIME::DATE_FORMAT::HOUR_FORMAT) != std::string::npos)
-		{
-			size_t index_head = output.find(MOONG::TIME::DATE_FORMAT::HOUR_FORMAT);
-			index_head += MOONG::TIME::DATE_FORMAT::HOUR_FORMAT.length() + 1;
-			size_t index_tail = output.find(")", index_head);
+				output.replace(index_head, (index_tail - index_head) + 1, "");
 
-			output.replace(
-				output.find(MOONG::TIME::DATE_FORMAT::HOUR_FORMAT),
-				(index_tail - (output.find(MOONG::TIME::DATE_FORMAT::HOUR_FORMAT)) + 1),
-				MOONG::StringTool::format(std::string("%") + output.substr(index_head, index_tail - index_head) + std::string("d"), system_time.wHour)
-			);
-		}
-		else if (output.find(MOONG::TIME::DATE_FORMAT::HOUR) != std::string::npos)
-		{
-			MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::HOUR, MOONG::ConvertDataType::toString(system_time.wHour));
+				MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::DAY, MOONG::StringTool::format(format, system_time.wDay));
+			}
+			else
+			{
+				MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::DAY, MOONG::ConvertDataType::toString(system_time.wDay));
+			}
 		}
 
-		if (output.find(MOONG::TIME::DATE_FORMAT::MINUTE_FORMAT) != std::string::npos)
+		if (output.find(MOONG::TIME::DATE_FORMAT::HOUR) != std::string::npos)
 		{
-			size_t index_head = output.find(MOONG::TIME::DATE_FORMAT::MINUTE_FORMAT);
-			index_head += MOONG::TIME::DATE_FORMAT::MINUTE_FORMAT.length() + 1;
-			size_t index_tail = output.find(")", index_head);
+			if (output.find(MOONG::TIME::DATE_FORMAT::HOUR_FORMAT) != std::string::npos)
+			{
+				size_t index_head = output.find(MOONG::TIME::DATE_FORMAT::HOUR_FORMAT);
+				size_t index_tail = output.find(")", index_head);
 
-			output.replace(
-				output.find(MOONG::TIME::DATE_FORMAT::MINUTE_FORMAT),
-				(index_tail - (output.find(MOONG::TIME::DATE_FORMAT::MINUTE_FORMAT)) + 1),
-				MOONG::StringTool::format(std::string("%") + output.substr(index_head, index_tail - index_head) + std::string("d"), system_time.wMinute)
-			);
-		}
-		else if (output.find(MOONG::TIME::DATE_FORMAT::MINUTE) != std::string::npos)
-		{
-			MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::MINUTE, MOONG::ConvertDataType::toString(system_time.wMinute));
-		}
+				std::string format = output.substr(index_head + MOONG::TIME::DATE_FORMAT::HOUR_FORMAT.length(), index_tail - (index_head + MOONG::TIME::DATE_FORMAT::HOUR_FORMAT.length()));
 
-		if (output.find(MOONG::TIME::DATE_FORMAT::MILLI_SECONDS_FORMAT) != std::string::npos)
-		{
-			size_t index_head = output.find(MOONG::TIME::DATE_FORMAT::MILLI_SECONDS_FORMAT);
-			index_head += MOONG::TIME::DATE_FORMAT::MILLI_SECONDS_FORMAT.length() + 1;
-			size_t index_tail = output.find(")", index_head);
+				output.replace(index_head, (index_tail - index_head) + 1, "");
 
-			output.replace(
-				output.find(MOONG::TIME::DATE_FORMAT::MILLI_SECONDS_FORMAT),
-				(index_tail - (output.find(MOONG::TIME::DATE_FORMAT::MILLI_SECONDS_FORMAT)) + 1),
-				MOONG::StringTool::format(std::string("%") + output.substr(index_head, index_tail - index_head) + std::string("d"), system_time.wMilliseconds)
-			);
-		}
-		else if (output.find(MOONG::TIME::DATE_FORMAT::MILLI_SECONDS) != std::string::npos)
-		{
-			MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::MILLI_SECONDS, MOONG::ConvertDataType::toString(system_time.wMilliseconds));
+				MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::HOUR, MOONG::StringTool::format(format, system_time.wHour));
+			}
+			else
+			{
+				MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::HOUR, MOONG::ConvertDataType::toString(system_time.wHour));
+			}
 		}
 
-		if (output.find(MOONG::TIME::DATE_FORMAT::SECOND_FORMAT) != std::string::npos)
+		if (output.find(MOONG::TIME::DATE_FORMAT::MINUTE) != std::string::npos)
 		{
-			size_t index_head = output.find(MOONG::TIME::DATE_FORMAT::SECOND_FORMAT);
-			index_head += MOONG::TIME::DATE_FORMAT::SECOND_FORMAT.length() + 1;
-			size_t index_tail = output.find(")", index_head);
+			if (output.find(MOONG::TIME::DATE_FORMAT::MINUTE_FORMAT) != std::string::npos)
+			{
+				size_t index_head = output.find(MOONG::TIME::DATE_FORMAT::MINUTE_FORMAT);
+				size_t index_tail = output.find(")", index_head);
 
-			output.replace(
-				output.find(MOONG::TIME::DATE_FORMAT::SECOND_FORMAT),
-				(index_tail - (output.find(MOONG::TIME::DATE_FORMAT::SECOND_FORMAT)) + 1),
-				MOONG::StringTool::format(std::string("%") + output.substr(index_head, index_tail - index_head) + std::string("d"), system_time.wSecond)
-			);
+				std::string format = output.substr(index_head + MOONG::TIME::DATE_FORMAT::MINUTE_FORMAT.length(), index_tail - (index_head + MOONG::TIME::DATE_FORMAT::MINUTE_FORMAT.length()));
+
+				output.replace(index_head, (index_tail - index_head) + 1, "");
+
+				MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::MINUTE, MOONG::StringTool::format(format, system_time.wMinute));
+			}
+			else
+			{
+				MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::MINUTE, MOONG::ConvertDataType::toString(system_time.wMinute));
+			}
 		}
-		else if (output.find(MOONG::TIME::DATE_FORMAT::SECOND) != std::string::npos)
+
+		if (output.find(MOONG::TIME::DATE_FORMAT::MILLISECONDS) != std::string::npos)
 		{
-			MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::SECOND, MOONG::ConvertDataType::toString(system_time.wSecond));
+			if (output.find(MOONG::TIME::DATE_FORMAT::MILLISECONDS_FORMAT) != std::string::npos)
+			{
+				size_t index_head = output.find(MOONG::TIME::DATE_FORMAT::MILLISECONDS_FORMAT);
+				size_t index_tail = output.find(")", index_head);
+
+				std::string format = output.substr(index_head + MOONG::TIME::DATE_FORMAT::MILLISECONDS_FORMAT.length(), index_tail - (index_head + MOONG::TIME::DATE_FORMAT::MILLISECONDS_FORMAT.length()));
+
+				output.replace(index_head, (index_tail - index_head) + 1, "");
+
+				MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::MILLISECONDS, MOONG::StringTool::format(format, system_time.wMilliseconds));
+			}
+			else
+			{
+				MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::MILLISECONDS, MOONG::ConvertDataType::toString(system_time.wMilliseconds));
+			}
+		}
+
+		if (output.find(MOONG::TIME::DATE_FORMAT::SECOND) != std::string::npos)
+		{
+			if (output.find(MOONG::TIME::DATE_FORMAT::SECOND_FORMAT) != std::string::npos)
+			{
+				size_t index_head = output.find(MOONG::TIME::DATE_FORMAT::SECOND_FORMAT);
+				size_t index_tail = output.find(")", index_head);
+
+				std::string format = output.substr(index_head + MOONG::TIME::DATE_FORMAT::SECOND_FORMAT.length(), index_tail - (index_head + MOONG::TIME::DATE_FORMAT::SECOND_FORMAT.length()));
+
+				output.replace(index_head, (index_tail - index_head) + 1, "");
+
+				MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::SECOND, MOONG::StringTool::format(format, system_time.wSecond));
+			}
+			else
+			{
+				MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::SECOND, MOONG::ConvertDataType::toString(system_time.wSecond));
+			}
 		}
 	}
 
