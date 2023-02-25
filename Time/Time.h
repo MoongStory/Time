@@ -8,6 +8,7 @@
 #define _TIME_H_
 
 #include <string>
+#include <wtypes.h>
 
 namespace MOONG
 {
@@ -53,9 +54,15 @@ namespace MOONG
 		//			foramt:(형식), 여기에서 형식은 출력시 "%d"에서 '%'와 'd' 사이에 들어갈 형식이다.
 		static const std::string get_current_time(std::string date_format = "");
 
-		static const std::string seconds_to_date(unsigned long seconds);
+		static const std::string second_to_date(unsigned long param_second);
+
+		static const SYSTEMTIME calculate_difference_between_times(SYSTEMTIME start_time, SYSTEMTIME end_time);
 	protected:
 	private:
+		// TODO:
+		//		make_date_format_(SYSTEMTIME system_time, std::string date_format = "");
+		
+		static const unsigned long long get_time_diff_in_milliseconds(const SYSTEMTIME& start_time, const SYSTEMTIME& end_time);
 	};
 }
 #endif	// _TIME_H_
