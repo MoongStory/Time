@@ -240,6 +240,11 @@ const SYSTEMTIME MOONG::Time::calculate_difference_between_times(SYSTEMTIME star
 	return MOONG::ConvertDataType::milliseconds_to_systemtime(MOONG::Time::get_time_diff_in_milliseconds(start_time, end_time));
 }
 
+const std::string MOONG::Time::make_date_format_(SYSTEMTIME system_time, std::string date_format/* = ""*/)
+{
+	return std::string();
+}
+
 const unsigned long long MOONG::Time::get_time_diff_in_milliseconds(const SYSTEMTIME& start_time, const SYSTEMTIME& end_time)
 {
 	FILETIME file_time_1 = { 0 }, file_time_2 = { 0 };
@@ -254,7 +259,5 @@ const unsigned long long MOONG::Time::get_time_diff_in_milliseconds(const SYSTEM
 	ul2.LowPart = file_time_2.dwLowDateTime;
 	ul2.HighPart = file_time_2.dwHighDateTime;
 
-	unsigned long long diff = (ul2.QuadPart - ul1.QuadPart) / 10000;
-	
-	return diff < 0 ? (diff * -1) : diff;
+	return abs(static_cast<long long>(ul2.QuadPart - ul1.QuadPart)) / 10000;
 }

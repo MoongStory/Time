@@ -59,8 +59,7 @@ namespace MOONG
 		static const SYSTEMTIME calculate_difference_between_times(SYSTEMTIME start_time, SYSTEMTIME end_time);
 	protected:
 	private:
-		// TODO:
-		//		make_date_format_(SYSTEMTIME system_time, std::string date_format = "");
+		static const std::string make_date_format_(SYSTEMTIME system_time, std::string date_format = "");
 		
 		static const unsigned long long get_time_diff_in_milliseconds(const SYSTEMTIME& start_time, const SYSTEMTIME& end_time);
 	};
