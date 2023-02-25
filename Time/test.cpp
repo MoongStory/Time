@@ -7,8 +7,10 @@
 
 int main()
 {
-	std::cout << "seconds_to_data[" << MOONG::Time::second_to_date(3601) << "]" << std::endl; // TODO: make_time_taken_format
-	std::cout << "make_date_format[" << MOONG::Time::make_date_format(MOONG::ConvertDataType::milliseconds_to_systemtime(3601 * 1000)).c_str() << "]" << std::endl;
+	std::cout << "seconds_to_data[" << MOONG::Time::make_time_taken_format(3601000) << "]" << std::endl;
+	std::cout << "seconds_to_data[" << MOONG::Time::make_time_taken_format(3601010) << "]" << std::endl;
+	std::cout << "make_date_format[" << MOONG::Time::make_time_taken_format(MOONG::ConvertDataType::milliseconds_to_systemtime(3601000)).c_str() << "]" << std::endl;
+	std::cout << "make_date_format[" << MOONG::Time::make_time_taken_format(MOONG::ConvertDataType::milliseconds_to_systemtime(3601010)).c_str() << "]" << std::endl;
 
 	std::cout << std::endl;
 
@@ -27,7 +29,12 @@ int main()
 	SYSTEMTIME start_time = { 0 };
 	GetLocalTime(&start_time);
 
-	start_time.wDay -= 1;
+	//start_time.wYear -= 1;
+	//start_time.wMonth -= 1;
+	//start_time.wDay -= 1;
+	start_time.wHour -= 1;
+	start_time.wMinute -= 1;
+	start_time.wSecond -= 1;
 	start_time.wMilliseconds -= 1;
 
 	SYSTEMTIME end_time = { 0 };
@@ -36,6 +43,9 @@ int main()
 	SYSTEMTIME calculated_time = MOONG::Time::calculate_difference_between_times(start_time, end_time);
 
 	std::cout << "make_date_format[" << MOONG::Time::make_date_format(calculated_time, "year년 month월 day일 hour시 minute분 second초 milliseconds밀리초") << "]" << std::endl;
+	std::cout << "make_time_taken_format[" << MOONG::Time::make_time_taken_format(calculated_time).c_str() << "]" << std::endl;
+
+	std::cout << "make_time_taken_format[" << MOONG::Time::make_time_taken_format(MOONG::Time::get_current_time()).c_str() << "]" << std::endl;
 
 	std::cout << std::endl;
 

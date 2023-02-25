@@ -11,68 +11,6 @@ const SYSTEMTIME MOONG::Time::get_current_time()
 	return system_time;
 }
 
-const std::string MOONG::Time::second_to_date(unsigned long param_second)
-{
-	if (0 == param_second)
-	{
-		return std::string("0초");
-	}
-
-	const unsigned long second_equal_to_minute = 60;
-	const unsigned long second_equal_to_hour = second_equal_to_minute * 60;
-	const unsigned long second_equal_to_day = second_equal_to_hour * 24;
-
-	unsigned int day = param_second / second_equal_to_day;
-	param_second %= second_equal_to_day;
-
-	unsigned int hour = param_second / second_equal_to_hour;
-	param_second %= second_equal_to_hour;
-
-	unsigned int minute = param_second / second_equal_to_minute;
-	param_second %= second_equal_to_minute;
-
-	unsigned int second = param_second;
-
-	std::string date = "";
-
-	if (day > 0)
-	{
-		date += MOONG::StringTool::format("%d일", day);
-	}
-
-	if (hour > 0)
-	{
-		if (date.length() > 0)
-		{
-			date += " ";
-		}
-
-		date += MOONG::StringTool::format("%d시간", hour);
-	}
-
-	if (minute > 0)
-	{
-		if (date.length() > 0)
-		{
-			date += " ";
-		}
-
-		date += MOONG::StringTool::format("%d분", minute);
-	}
-
-	if (second > 0)
-	{
-		if (date.length() > 0)
-		{
-			date += " ";
-		}
-
-		date += MOONG::StringTool::format("%d초", second);
-	}
-
-	return date;
-}
-
 const SYSTEMTIME MOONG::Time::calculate_difference_between_times(SYSTEMTIME start_time, SYSTEMTIME end_time)
 {
 	return MOONG::ConvertDataType::milliseconds_to_systemtime(get_time_diff_in_milliseconds_(start_time, end_time));
@@ -252,6 +190,154 @@ const std::string MOONG::Time::make_date_format(SYSTEMTIME system_time, std::str
 				MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::SECOND, MOONG::ConvertDataType::toString(system_time.wSecond));
 			}
 		}
+	}
+
+	return output;
+}
+
+const std::string MOONG::Time::make_time_taken_format(unsigned long long param_milliseconds)
+{
+	if (0 == param_milliseconds)
+	{
+		return std::string("0밀리초");
+	}
+
+	const unsigned long long milliseconds_equal_to_second = 1000;
+	const unsigned long long milliseconds_equal_to_minute = milliseconds_equal_to_second * 60;
+	const unsigned long long milliseconds_equal_to_hour = milliseconds_equal_to_minute * 60;
+	const unsigned long long milliseconds_equal_to_day = milliseconds_equal_to_hour * 24;
+
+	unsigned int day = static_cast<unsigned int>(param_milliseconds / milliseconds_equal_to_day);
+	param_milliseconds %= milliseconds_equal_to_day;
+
+	unsigned int hour = static_cast<unsigned int>(param_milliseconds / milliseconds_equal_to_hour);
+	param_milliseconds %= milliseconds_equal_to_hour;
+
+	unsigned int minute = static_cast<unsigned int>(param_milliseconds / milliseconds_equal_to_minute);
+	param_milliseconds %= milliseconds_equal_to_minute;
+
+	unsigned int second = static_cast<unsigned int>(param_milliseconds / milliseconds_equal_to_second);
+	param_milliseconds %= milliseconds_equal_to_second;
+
+	unsigned int milliseconds = static_cast<unsigned int>(param_milliseconds);
+
+	std::string output = "";
+
+	if (day > 0)
+	{
+		output = MOONG::StringTool::format("%d일", day);
+	}
+
+	if (hour > 0)
+	{
+		if (output.length() > 0)
+		{
+			output += " ";
+		}
+
+		output += MOONG::StringTool::format("%d시간", hour);
+	}
+
+	if (minute > 0)
+	{
+		if (output.length() > 0)
+		{
+			output += " ";
+		}
+
+		output += MOONG::StringTool::format("%d분", minute);
+	}
+
+	if (second > 0)
+	{
+		if (output.length() > 0)
+		{
+			output += " ";
+		}
+
+		output += MOONG::StringTool::format("%d초", second);
+	}
+
+	if (milliseconds > 0)
+	{
+		if (output.length() > 0)
+		{
+			output += " ";
+		}
+
+		output += MOONG::StringTool::format("%d밀리초", milliseconds);
+	}
+
+	return output;
+}
+
+const std::string MOONG::Time::make_time_taken_format(const SYSTEMTIME system_time)
+{
+	std::string output = "";
+
+	if (system_time.wYear != 0)
+	{
+		output = MOONG::StringTool::format("%d년", system_time.wYear);
+	}
+	
+	if (system_time.wMonth != 0)
+	{
+		if (output.length() > 0)
+		{
+			output += " ";
+		}
+
+		output += MOONG::StringTool::format("%d개월", system_time.wMonth);
+	}
+
+	if (system_time.wDay != 0)
+	{
+		if (output.length() > 0)
+		{
+			output += " ";
+		}
+
+		output += MOONG::StringTool::format("%d일", system_time.wDay);
+	}
+
+	if (system_time.wHour != 0)
+	{
+		if (output.length() > 0)
+		{
+			output += " ";
+		}
+
+		output += MOONG::StringTool::format("%d시간", system_time.wHour);
+	}
+
+	if (system_time.wMinute != 0)
+	{
+		if (output.length() > 0)
+		{
+			output += " ";
+		}
+
+		output += MOONG::StringTool::format("%d분", system_time.wMinute);
+	}
+
+	if (system_time.wSecond != 0)
+	{
+		if (output.length() > 0)
+		{
+			output += " ";
+		}
+
+		output += MOONG::StringTool::format("%d초", system_time.wSecond);
+	}
+
+	if (system_time.wMilliseconds != 0)
+	{
+		if (output.length() > 0)
+		{
+			output += " ";
+		}
+
+		output += MOONG::StringTool::format("%d밀리초", system_time.wMilliseconds);
 	}
 
 	return output;

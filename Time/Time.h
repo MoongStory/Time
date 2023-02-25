@@ -54,11 +54,12 @@ namespace MOONG
 		//		"year년 month월 day일(day_of_week) hour시 minute분 second초 milliseconds(month_format:%02d)(day_format:%02d)(hour_format:%02d)(minute_format:%02d)(second_format:%02d)(milliseconds_format:%03d)밀리초" -> "2023년 02월 24일(금) 14시 34분 43초 123밀리초"
 		static const SYSTEMTIME get_current_time();
 
-		static const std::string second_to_date(unsigned long param_second);
-
 		static const SYSTEMTIME calculate_difference_between_times(SYSTEMTIME start_time, SYSTEMTIME end_time);
 
 		static const std::string make_date_format(SYSTEMTIME system_time, std::string date_format = "");
+
+		static const std::string make_time_taken_format(unsigned long long param_milliseconds);
+		static const std::string make_time_taken_format(const SYSTEMTIME system_time);
 	protected:
 	private:
 		
