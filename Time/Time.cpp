@@ -66,11 +66,17 @@ const std::string MOONG::Time::get_current_time(std::string date_format/* = ""*/
 
 		if (current_time.find(MOONG::TIME::DATE_FORMAT::MONTH_FORMAT) != std::string::npos)
 		{
-			// 여기부터
-			MOONG::StringTool::replace(current_time, MOONG::TIME::DATE_FORMAT::MONTH, MOONG::ConvertDataType::toString(system_time.wMonth));
+			size_t index_head = current_time.find(MOONG::TIME::DATE_FORMAT::MONTH_FORMAT);
+			index_head += MOONG::TIME::DATE_FORMAT::MONTH_FORMAT.length() + 1;
+			size_t index_tail = current_time.find(")", index_head);
+			
+			current_time.replace(
+				current_time.find(MOONG::TIME::DATE_FORMAT::MONTH_FORMAT),
+				(index_tail - (current_time.find(MOONG::TIME::DATE_FORMAT::MONTH_FORMAT)) + 1),
+				MOONG::StringTool::format(std::string("%") + current_time.substr(index_head, index_tail - index_head) + std::string("d"), system_time.wMonth)
+			);
 		}
-
-		if (current_time.find(MOONG::TIME::DATE_FORMAT::MONTH) != std::string::npos)
+		else if (current_time.find(MOONG::TIME::DATE_FORMAT::MONTH) != std::string::npos)
 		{
 			MOONG::StringTool::replace(current_time, MOONG::TIME::DATE_FORMAT::MONTH, MOONG::ConvertDataType::toString(system_time.wMonth));
 		}
@@ -80,27 +86,87 @@ const std::string MOONG::Time::get_current_time(std::string date_format/* = ""*/
 			MOONG::StringTool::replace(current_time, MOONG::TIME::DATE_FORMAT::DAY_OF_WEEK, day_of_week);
 		}
 
-		if (current_time.find(MOONG::TIME::DATE_FORMAT::DAY) != std::string::npos)
+		if (current_time.find(MOONG::TIME::DATE_FORMAT::DAY_FORMAT) != std::string::npos)
+		{
+			size_t index_head = current_time.find(MOONG::TIME::DATE_FORMAT::DAY_FORMAT);
+			index_head += MOONG::TIME::DATE_FORMAT::DAY_FORMAT.length() + 1;
+			size_t index_tail = current_time.find(")", index_head);
+
+			current_time.replace(
+				current_time.find(MOONG::TIME::DATE_FORMAT::DAY_FORMAT),
+				(index_tail - (current_time.find(MOONG::TIME::DATE_FORMAT::DAY_FORMAT)) + 1),
+				MOONG::StringTool::format(std::string("%") + current_time.substr(index_head, index_tail - index_head) + std::string("d"), system_time.wDay)
+			);
+		}
+		else if (current_time.find(MOONG::TIME::DATE_FORMAT::DAY) != std::string::npos)
 		{
 			MOONG::StringTool::replace(current_time, MOONG::TIME::DATE_FORMAT::DAY, MOONG::ConvertDataType::toString(system_time.wDay));
 		}
 
-		if (current_time.find(MOONG::TIME::DATE_FORMAT::HOUR) != std::string::npos)
+		if (current_time.find(MOONG::TIME::DATE_FORMAT::HOUR_FORMAT) != std::string::npos)
+		{
+			size_t index_head = current_time.find(MOONG::TIME::DATE_FORMAT::HOUR_FORMAT);
+			index_head += MOONG::TIME::DATE_FORMAT::HOUR_FORMAT.length() + 1;
+			size_t index_tail = current_time.find(")", index_head);
+
+			current_time.replace(
+				current_time.find(MOONG::TIME::DATE_FORMAT::HOUR_FORMAT),
+				(index_tail - (current_time.find(MOONG::TIME::DATE_FORMAT::HOUR_FORMAT)) + 1),
+				MOONG::StringTool::format(std::string("%") + current_time.substr(index_head, index_tail - index_head) + std::string("d"), system_time.wHour)
+			);
+		}
+		else if (current_time.find(MOONG::TIME::DATE_FORMAT::HOUR) != std::string::npos)
 		{
 			MOONG::StringTool::replace(current_time, MOONG::TIME::DATE_FORMAT::HOUR, MOONG::ConvertDataType::toString(system_time.wHour));
 		}
 
-		if (current_time.find(MOONG::TIME::DATE_FORMAT::MINUTE) != std::string::npos)
+		if (current_time.find(MOONG::TIME::DATE_FORMAT::MINUTE_FORMAT) != std::string::npos)
+		{
+			size_t index_head = current_time.find(MOONG::TIME::DATE_FORMAT::MINUTE_FORMAT);
+			index_head += MOONG::TIME::DATE_FORMAT::MINUTE_FORMAT.length() + 1;
+			size_t index_tail = current_time.find(")", index_head);
+
+			current_time.replace(
+				current_time.find(MOONG::TIME::DATE_FORMAT::MINUTE_FORMAT),
+				(index_tail - (current_time.find(MOONG::TIME::DATE_FORMAT::MINUTE_FORMAT)) + 1),
+				MOONG::StringTool::format(std::string("%") + current_time.substr(index_head, index_tail - index_head) + std::string("d"), system_time.wMinute)
+			);
+		}
+		else if (current_time.find(MOONG::TIME::DATE_FORMAT::MINUTE) != std::string::npos)
 		{
 			MOONG::StringTool::replace(current_time, MOONG::TIME::DATE_FORMAT::MINUTE, MOONG::ConvertDataType::toString(system_time.wMinute));
 		}
 
-		if (current_time.find(MOONG::TIME::DATE_FORMAT::MILLI_SECONDS) != std::string::npos)
+		if (current_time.find(MOONG::TIME::DATE_FORMAT::MILLI_SECONDS_FORMAT) != std::string::npos)
+		{
+			size_t index_head = current_time.find(MOONG::TIME::DATE_FORMAT::MILLI_SECONDS_FORMAT);
+			index_head += MOONG::TIME::DATE_FORMAT::MILLI_SECONDS_FORMAT.length() + 1;
+			size_t index_tail = current_time.find(")", index_head);
+
+			current_time.replace(
+				current_time.find(MOONG::TIME::DATE_FORMAT::MILLI_SECONDS_FORMAT),
+				(index_tail - (current_time.find(MOONG::TIME::DATE_FORMAT::MILLI_SECONDS_FORMAT)) + 1),
+				MOONG::StringTool::format(std::string("%") + current_time.substr(index_head, index_tail - index_head) + std::string("d"), system_time.wMilliseconds)
+			);
+		}
+		else if (current_time.find(MOONG::TIME::DATE_FORMAT::MILLI_SECONDS) != std::string::npos)
 		{
 			MOONG::StringTool::replace(current_time, MOONG::TIME::DATE_FORMAT::MILLI_SECONDS, MOONG::ConvertDataType::toString(system_time.wMilliseconds));
 		}
 
-		if (current_time.find(MOONG::TIME::DATE_FORMAT::SECOND) != std::string::npos)
+		if (current_time.find(MOONG::TIME::DATE_FORMAT::SECOND_FORMAT) != std::string::npos)
+		{
+			size_t index_head = current_time.find(MOONG::TIME::DATE_FORMAT::SECOND_FORMAT);
+			index_head += MOONG::TIME::DATE_FORMAT::SECOND_FORMAT.length() + 1;
+			size_t index_tail = current_time.find(")", index_head);
+
+			current_time.replace(
+				current_time.find(MOONG::TIME::DATE_FORMAT::SECOND_FORMAT),
+				(index_tail - (current_time.find(MOONG::TIME::DATE_FORMAT::SECOND_FORMAT)) + 1),
+				MOONG::StringTool::format(std::string("%") + current_time.substr(index_head, index_tail - index_head) + std::string("d"), system_time.wSecond)
+			);
+		}
+		else if (current_time.find(MOONG::TIME::DATE_FORMAT::SECOND) != std::string::npos)
 		{
 			MOONG::StringTool::replace(current_time, MOONG::TIME::DATE_FORMAT::SECOND, MOONG::ConvertDataType::toString(system_time.wSecond));
 		}
