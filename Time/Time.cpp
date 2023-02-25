@@ -3,12 +3,12 @@
 #include "../../ConvertDataType/ConvertDataType/ConvertDataType.h"
 #include "../../StringTool/StringTool/StringTool.h"
 
-const std::string MOONG::Time::get_current_time(std::string date_format/* = ""*/)
+const SYSTEMTIME MOONG::Time::get_current_time()
 {
 	SYSTEMTIME system_time = { 0 };
 	GetLocalTime(&system_time);
 
-	return make_date_format(system_time, date_format);
+	return system_time;
 }
 
 const std::string MOONG::Time::second_to_date(unsigned long param_second)

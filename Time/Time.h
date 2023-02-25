@@ -52,7 +52,7 @@ namespace MOONG
 		//		"year년 month월 day일 day_of_week hour시 minute분 second초 milli_seconds밀리초" -> "2023년 02월 24일(금요일) 14시 34분 43초 123밀리초"
 		//		"YEAR년 month(format:02)월 day(format:03)일(day_of_week) HOUR(FORMAT:04)시 minute(foRMat:05)분 second(format:06)초 MILLI_SECONDS(format:07)밀리초" -> "2023년 02월 024일(금요일) 0014시 00034분 000043초 0000123밀리초"
 		//			foramt:(형식), 여기에서 형식은 출력시 "%d"에서 '%'와 'd' 사이에 들어갈 형식이다.
-		static const std::string get_current_time(std::string date_format = "");
+		static const SYSTEMTIME get_current_time();
 
 		static const std::string second_to_date(unsigned long param_second);
 
