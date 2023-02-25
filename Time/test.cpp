@@ -20,7 +20,8 @@ int main()
 	SYSTEMTIME start_time = { 0 };
 	GetLocalTime(&start_time);
 
-	Sleep(1000);
+	//Sleep(1000);
+	start_time.wYear -= 1;
 
 	SYSTEMTIME end_time = { 0 };
 	GetLocalTime(&end_time);

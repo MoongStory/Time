@@ -237,35 +237,7 @@ const std::string MOONG::Time::second_to_date(unsigned long param_second)
 
 const SYSTEMTIME MOONG::Time::calculate_difference_between_times(SYSTEMTIME start_time, SYSTEMTIME end_time)
 {
-	unsigned long long calculated_milliseconds = MOONG::Time::get_time_diff_in_milliseconds(start_time, end_time);
-	
-	const unsigned long long milliseconds_equal_to_second = 1000;
-	const unsigned long long milliseconds_equal_to_minute = milliseconds_equal_to_second * 60;
-	const unsigned long long milliseconds_equal_to_hour = milliseconds_equal_to_minute * 60;
-	const unsigned long long milliseconds_equal_to_day = milliseconds_equal_to_hour * 24;
-
-	WORD day = static_cast<WORD>(calculated_milliseconds / milliseconds_equal_to_day);
-	calculated_milliseconds %= milliseconds_equal_to_day;
-
-	WORD hour = static_cast<WORD>(calculated_milliseconds / milliseconds_equal_to_hour);
-	calculated_milliseconds %= milliseconds_equal_to_hour;
-
-	WORD minute = static_cast<WORD>(calculated_milliseconds / milliseconds_equal_to_minute);
-	calculated_milliseconds %= milliseconds_equal_to_minute;
-
-	WORD second = static_cast<WORD>(calculated_milliseconds / milliseconds_equal_to_second);
-	calculated_milliseconds %= milliseconds_equal_to_second;
-
-	WORD milliseconds = static_cast<WORD>(calculated_milliseconds);
-
-	SYSTEMTIME calculated_time = { 0 };
-	calculated_time.wDay = day;
-	calculated_time.wHour = hour;
-	calculated_time.wMinute = minute;
-	calculated_time.wSecond = second;
-	calculated_time.wMilliseconds = milliseconds;
-
-	return calculated_time;
+	return MOONG::ConvertDataType::milliseconds_to_systemtime(MOONG::Time::get_time_diff_in_milliseconds(start_time, end_time));
 }
 
 const unsigned long long MOONG::Time::get_time_diff_in_milliseconds(const SYSTEMTIME& start_time, const SYSTEMTIME& end_time)
