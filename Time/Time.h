@@ -35,8 +35,8 @@ namespace MOONG
 			static const std::string SECOND_FORMAT = "second(format";
 			static const std::string SECOND = "second";
 
-			static const std::string MILLI_SECONDS_FORMAT = "milli_seconds(format";
-			static const std::string MILLI_SECONDS = "milli_seconds";
+			static const std::string MILLI_SECONDS_FORMAT = "milliseconds(format";
+			static const std::string MILLI_SECONDS = "milliseconds";
 		}
 	}
 
@@ -57,11 +57,12 @@ namespace MOONG
 		static const std::string second_to_date(unsigned long param_second);
 
 		static const SYSTEMTIME calculate_difference_between_times(SYSTEMTIME start_time, SYSTEMTIME end_time);
+
+		static const std::string make_date_format(SYSTEMTIME system_time, std::string date_format = "");
 	protected:
 	private:
-		static const std::string make_date_format_(SYSTEMTIME system_time, std::string date_format = "");
 		
-		static const unsigned long long get_time_diff_in_milliseconds(const SYSTEMTIME& start_time, const SYSTEMTIME& end_time);
+		static const unsigned long long get_time_diff_in_milliseconds_(const SYSTEMTIME& start_time, const SYSTEMTIME& end_time);
 	};
 }
 #endif	// _TIME_H_
