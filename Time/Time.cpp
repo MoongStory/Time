@@ -86,25 +86,25 @@ const std::string MOONG::Time::make_date_format(SYSTEMTIME system_time, std::str
 	switch (system_time.wDayOfWeek)
 	{
 	case 0:
-		day_of_week = "일요일";
+		day_of_week = "일";
 		break;
 	case 1:
-		day_of_week = "월요일";
+		day_of_week = "월";
 		break;
 	case 2:
-		day_of_week = "화요일";
+		day_of_week = "화";
 		break;
 	case 3:
-		day_of_week = "수요일";
+		day_of_week = "수";
 		break;
 	case 4:
-		day_of_week = "목요일";
+		day_of_week = "목";
 		break;
 	case 5:
-		day_of_week = "금요일";
+		day_of_week = "금";
 		break;
 	case 6:
-		day_of_week = "토요일";
+		day_of_week = "토";
 		break;
 	default:
 		day_of_week = "something wrong";
