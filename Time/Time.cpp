@@ -195,17 +195,17 @@ const std::string MOONG::Time::make_date_format(SYSTEMTIME system_time, std::str
 	return output;
 }
 
-const std::string MOONG::Time::make_time_taken_format(unsigned long long param_milliseconds)
+const std::string MOONG::Time::make_time_taken_format(unsigned __int64 param_milliseconds)
 {
 	if (0 == param_milliseconds)
 	{
 		return std::string("0π–∏Æ√ ");
 	}
 
-	const unsigned long long milliseconds_equal_to_second = 1000;
-	const unsigned long long milliseconds_equal_to_minute = milliseconds_equal_to_second * 60;
-	const unsigned long long milliseconds_equal_to_hour = milliseconds_equal_to_minute * 60;
-	const unsigned long long milliseconds_equal_to_day = milliseconds_equal_to_hour * 24;
+	const unsigned __int64 milliseconds_equal_to_second = 1000;
+	const unsigned __int64 milliseconds_equal_to_minute = milliseconds_equal_to_second * 60;
+	const unsigned __int64 milliseconds_equal_to_hour = milliseconds_equal_to_minute * 60;
+	const unsigned __int64 milliseconds_equal_to_day = milliseconds_equal_to_hour * 24;
 
 	unsigned int day = static_cast<unsigned int>(param_milliseconds / milliseconds_equal_to_day);
 	param_milliseconds %= milliseconds_equal_to_day;
@@ -343,7 +343,7 @@ const std::string MOONG::Time::make_time_taken_format(const SYSTEMTIME system_ti
 	return output;
 }
 
-const unsigned long long MOONG::Time::get_time_diff_in_milliseconds_(const SYSTEMTIME& start_time, const SYSTEMTIME& end_time)
+const unsigned __int64 MOONG::Time::get_time_diff_in_milliseconds_(const SYSTEMTIME& start_time, const SYSTEMTIME& end_time)
 {
 	FILETIME file_time_1 = { 0 }, file_time_2 = { 0 };
 	ULARGE_INTEGER ul1 = { 0 }, ul2 = { 0 };
@@ -356,6 +356,6 @@ const unsigned long long MOONG::Time::get_time_diff_in_milliseconds_(const SYSTE
 
 	ul2.LowPart = file_time_2.dwLowDateTime;
 	ul2.HighPart = file_time_2.dwHighDateTime;
-
-	return abs(static_cast<long long>(ul2.QuadPart - ul1.QuadPart)) / 10000;
+	
+	return (ul2.QuadPart - ul1.QuadPart) < 0 ? (((ul2.QuadPart - ul1.QuadPart) * -1) / 10000) : ((ul2.QuadPart - ul1.QuadPart) / 10000);
 }

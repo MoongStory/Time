@@ -82,12 +82,12 @@ namespace MOONG
 
 		static const std::string make_date_format(SYSTEMTIME system_time, std::string date_format = "");
 
-		static const std::string make_time_taken_format(unsigned long long param_milliseconds);
+		static const std::string make_time_taken_format(unsigned __int64 param_milliseconds);
 		static const std::string make_time_taken_format(const SYSTEMTIME system_time);
 	protected:
 	private:
 		
-		static const unsigned long long get_time_diff_in_milliseconds_(const SYSTEMTIME& start_time, const SYSTEMTIME& end_time);
+		static const unsigned __int64 get_time_diff_in_milliseconds_(const SYSTEMTIME& start_time, const SYSTEMTIME& end_time);
 	};
 }
 #endif	// _TIME_H_
