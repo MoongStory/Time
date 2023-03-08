@@ -69,7 +69,7 @@ const std::string MOONG::Time::make_date_format(SYSTEMTIME system_time, std::str
 
 		if (output.find(MOONG::TIME::DATE_FORMAT::YEAR) != std::string::npos)
 		{
-			MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::YEAR, MOONG::ConvertDataType::toString(system_time.wYear));
+			MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::YEAR, MOONG::ConvertDataType::to_string(system_time.wYear));
 		}
 
 		if (output.find(MOONG::TIME::DATE_FORMAT::MONTH) != std::string::npos)
@@ -87,7 +87,7 @@ const std::string MOONG::Time::make_date_format(SYSTEMTIME system_time, std::str
 			}
 			else
 			{
-				MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::MONTH, MOONG::ConvertDataType::toString(system_time.wMonth));
+				MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::MONTH, MOONG::ConvertDataType::to_string(system_time.wMonth));
 			}
 		}
 
@@ -111,7 +111,7 @@ const std::string MOONG::Time::make_date_format(SYSTEMTIME system_time, std::str
 			}
 			else
 			{
-				MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::DAY, MOONG::ConvertDataType::toString(system_time.wDay));
+				MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::DAY, MOONG::ConvertDataType::to_string(system_time.wDay));
 			}
 		}
 
@@ -130,7 +130,7 @@ const std::string MOONG::Time::make_date_format(SYSTEMTIME system_time, std::str
 			}
 			else
 			{
-				MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::HOUR, MOONG::ConvertDataType::toString(system_time.wHour));
+				MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::HOUR, MOONG::ConvertDataType::to_string(system_time.wHour));
 			}
 		}
 
@@ -149,7 +149,7 @@ const std::string MOONG::Time::make_date_format(SYSTEMTIME system_time, std::str
 			}
 			else
 			{
-				MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::MINUTE, MOONG::ConvertDataType::toString(system_time.wMinute));
+				MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::MINUTE, MOONG::ConvertDataType::to_string(system_time.wMinute));
 			}
 		}
 
@@ -168,7 +168,7 @@ const std::string MOONG::Time::make_date_format(SYSTEMTIME system_time, std::str
 			}
 			else
 			{
-				MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::MILLISECONDS, MOONG::ConvertDataType::toString(system_time.wMilliseconds));
+				MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::MILLISECONDS, MOONG::ConvertDataType::to_string(system_time.wMilliseconds));
 			}
 		}
 
@@ -187,7 +187,7 @@ const std::string MOONG::Time::make_date_format(SYSTEMTIME system_time, std::str
 			}
 			else
 			{
-				MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::SECOND, MOONG::ConvertDataType::toString(system_time.wSecond));
+				MOONG::StringTool::replace(output, MOONG::TIME::DATE_FORMAT::SECOND, MOONG::ConvertDataType::to_string(system_time.wSecond));
 			}
 		}
 	}
