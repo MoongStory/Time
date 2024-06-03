@@ -71,7 +71,8 @@ namespace MOONG
 	private:
 
 	public:
-		// TODO: JavaScript의 getYear, getHour, getDay 등등 추가.
+		// TODO: JavaScript의 getTime, getFullYear, getDate, getDay, getHours, getMilliseconds, getMinutes, getMonth, getSeconds 추가.
+		// get_date(SYSTEMTIME time = NULL); 형식으로 매개변수 있으면 매개변수의 값을, 매개변수가 없으면 현재 시간 기준으로.
 		// TODO: make_date_format 삭제해야 하나???
 
 		// 샘플 소스
