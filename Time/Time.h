@@ -71,11 +71,13 @@ namespace MOONG
 	private:
 
 	public:
-		// year, month, day, day_of_week, hour, minute, second, milliseconds¸¦ ÇØ´çÇÏ´Â °ªÀ¸·Î Ä¡È¯.
+		// TODO: JavaScriptì˜ getYear, getHour, getDay ë“±ë“± ì¶”ê°€.
+		
+		// year, month, day, day_of_week, hour, minute, second, millisecondsë¥¼ í•´ë‹¹í•˜ëŠ” ê°’ìœ¼ë¡œ ì¹˜í™˜.
 		// format sample
-		//		"year³â month¿ù dayÀÏ day_of_week hour½Ã minuteºĞ secondÃÊ milli_seconds¹Ğ¸®ÃÊ" -> "2023³â 02¿ù 24ÀÏ(±İ) 14½Ã 34ºĞ 43ÃÊ 123¹Ğ¸®ÃÊ"
-		//		"year³â month(month_format:%02d)¿ù day(day_format:%02d)ÀÏ(day_of_week) hour(hour_format:%02d)½Ã minute(minute_format:%02d)ºĞ second(second_format:%02d)ÃÊ milliseconds(milliseconds_format:%03d)¹Ğ¸®ÃÊ" -> "2023³â 02¿ù 24ÀÏ(±İ) 14½Ã 34ºĞ 43ÃÊ 123¹Ğ¸®ÃÊ"
-		//		"year³â month¿ù dayÀÏ(day_of_week) hour½Ã minuteºĞ secondÃÊ milliseconds(month_format:%02d)(day_format:%02d)(hour_format:%02d)(minute_format:%02d)(second_format:%02d)(milliseconds_format:%03d)¹Ğ¸®ÃÊ" -> "2023³â 02¿ù 24ÀÏ(±İ) 14½Ã 34ºĞ 43ÃÊ 123¹Ğ¸®ÃÊ"
+		//		"yearë…„ monthì›” dayì¼ day_of_week hourì‹œ minuteë¶„ secondì´ˆ milli_secondsë°€ë¦¬ì´ˆ" -> "2023ë…„ 02ì›” 24ì¼(ê¸ˆ) 14ì‹œ 34ë¶„ 43ì´ˆ 123ë°€ë¦¬ì´ˆ"
+		//		"yearë…„ month(month_format:%02d)ì›” day(day_format:%02d)ì¼(day_of_week) hour(hour_format:%02d)ì‹œ minute(minute_format:%02d)ë¶„ second(second_format:%02d)ì´ˆ milliseconds(milliseconds_format:%03d)ë°€ë¦¬ì´ˆ" -> "2023ë…„ 02ì›” 24ì¼(ê¸ˆ) 14ì‹œ 34ë¶„ 43ì´ˆ 123ë°€ë¦¬ì´ˆ"
+		//		"yearë…„ monthì›” dayì¼(day_of_week) hourì‹œ minuteë¶„ secondì´ˆ milliseconds(month_format:%02d)(day_format:%02d)(hour_format:%02d)(minute_format:%02d)(second_format:%02d)(milliseconds_format:%03d)ë°€ë¦¬ì´ˆ" -> "2023ë…„ 02ì›” 24ì¼(ê¸ˆ) 14ì‹œ 34ë¶„ 43ì´ˆ 123ë°€ë¦¬ì´ˆ"
 		static const SYSTEMTIME get_current_time();
 
 		static const SYSTEMTIME calculate_difference_between_times(SYSTEMTIME start_time, SYSTEMTIME end_time);
