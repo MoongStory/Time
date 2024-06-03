@@ -72,6 +72,7 @@ namespace MOONG
 
 	public:
 		// TODO: JavaScript의 getYear, getHour, getDay 등등 추가.
+		// TODO: make_date_format 삭제해야 하나???
 		
 		// year, month, day, day_of_week, hour, minute, second, milliseconds를 해당하는 값으로 치환.
 		// format sample
