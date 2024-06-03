@@ -73,6 +73,23 @@ namespace MOONG
 	public:
 		// TODO: JavaScript의 getYear, getHour, getDay 등등 추가.
 		// TODO: make_date_format 삭제해야 하나???
+
+		// 샘플 소스
+		/*
+		#include <iostream>
+		#include <ctime>
+		
+		int main() {
+		    std::time_t now = std::time(nullptr);
+		    std::tm tm_info;
+		    localtime_s(&tm_info, &now);
+		
+		    std::cout << "현재 날짜: " << tm_info.tm_mday << "/" << (tm_info.tm_mon + 1) << "/" << (tm_info.tm_year + 1900) << std::endl;
+		    std::cout << "현재 시간: " << tm_info.tm_hour << ":" << tm_info.tm_min << ":" << tm_info.tm_sec << std::endl;
+		
+		    return 0;
+		}
+		*/
 		
 		// year, month, day, day_of_week, hour, minute, second, milliseconds를 해당하는 값으로 치환.
 		// format sample
