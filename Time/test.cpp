@@ -49,6 +49,5 @@ int main()
 
 	std::cout << std::endl;
 
-	std::cout << "get_full_year[" << MOONG::Time::get_full_year() << "]" << std::endl;
 	return 0;
 }

@@ -70,29 +70,7 @@ namespace MOONG
 	protected:
 	private:
 
-	public:
-		// TODO: JavaScript의 getFullYear, getDate, getDay, getHours, getMilliseconds, getMinutes, getMonth, getSeconds 추가.
-		// get_date(SYSTEMTIME time = NULL); 형식으로 매개변수 있으면 매개변수의 값을, 매개변수가 없으면 현재 시간 기준으로.
-		// TODO: make_date_format 삭제해야 하나???
-		static const unsigned int get_full_year();
-
-		// 샘플 소스
-		/*
-		#include <iostream>
-		#include <ctime>
-		
-		int main() {
-		    std::time_t now = std::time(nullptr);
-		    std::tm tm_info;
-		    localtime_s(&tm_info, &now);
-		
-		    std::cout << "현재 날짜: " << tm_info.tm_mday << "/" << (tm_info.tm_mon + 1) << "/" << (tm_info.tm_year + 1900) << std::endl;
-		    std::cout << "현재 시간: " << tm_info.tm_hour << ":" << tm_info.tm_min << ":" << tm_info.tm_sec << std::endl;
-		
-		    return 0;
-		}
-		*/
-		
+	public:		
 		// year, month, day, day_of_week, hour, minute, second, milliseconds를 해당하는 값으로 치환.
 		// format sample
 		//		"year년 month월 day일 day_of_week hour시 minute분 second초 milli_seconds밀리초" -> "2023년 02월 24일(금) 14시 34분 43초 123밀리초"
