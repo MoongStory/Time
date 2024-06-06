@@ -3,6 +3,11 @@
 #include "../../ConvertDataType/ConvertDataType/ConvertDataType.h"
 #include "../../StringTool/StringTool/StringTool.h"
 
+const unsigned int MOONG::Time::get_full_year()
+{
+	return MOONG::Time::get_current_time().wYear;
+}
+
 const SYSTEMTIME MOONG::Time::get_current_time()
 {
 	SYSTEMTIME system_time = { 0 };
